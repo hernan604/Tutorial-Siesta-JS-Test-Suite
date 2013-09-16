@@ -1,0 +1,32 @@
+This tutorial teaches how to automate testing using Siesta JS Testing Suite.
+
+The main reason i am writing this tutorial is it took me a long time to find a decent testing suite for JS. My background is very tied perl ecosystem and perl is one language that offers the top high end tools for many areas, including testing frameworks... (Test::More) ie. http://search.cpan.org/~mschwern/Test-Simple-0.98/lib/Test/More.pm
+
+So what does perl testing has to do with JS testing ? 
+
+TAP - Test Anything Protocol, was invented by perl coders and now is industry standard way to allow communication between "unit tests" and "test harness".
+    http://en.wikipedia.org/wiki/Test_Anything_Protocol
+
+"The Test Anything Protocol (TAP) is a protocol to allow communication between unit tests and a test harness. It allows individual tests (TAP producers) to communicate test results to the testing harness in a language-agnostic way. Originally developed for unit testing of the Perl interpreter in 1987, producers and parsers are now available for many development platforms."
+
+Unit tests: Tests certain parts, ie. methods of an application and prove that those specific parts work as expected
+
+Test harness: Allow for the automation of tests
+
+I like to think that software testing is just like if i sit by my computer with pencil and paper and a huge list of tests i must execute and see the application works. This is insane and most of the time can be automated. And that means, instead of executing each test manually you can write those tests into the testing framework and make it execute them and check wether values are correct or not.
+
+
+
+Testing Suite: Siesta JS
+
+The first thing i like about siesta is its JS only. That means i can run it on any browser, including my clients... i can send them the tests url and have them checkout how well the application is tested. 
+Another thing i like about siesta is the list of tests it allows me to create... i can use that in my favor.. for example, i can "document" certain functionality and usability of some html/js module.. just in case i forget where should i click in that module.
+It tells me all the global variables that exists within my page.
+It allows me to preload JS scripts that shall be used on every test by default.
+The support is great.. the company has a tool called Fiesta http://fiestadev.bryntum.com/ that is a mix of forum with tests so you can 'prove' them some bug they should fix.. and they reply quick!
+Is organized and allows the creation of groups of tests.
+Allows interface testing, mouse automation and also allows unit testing without interface.
+It can integrate into your application, so the new developer can run tests and check if he broke anything.
+Simple!
+
+
