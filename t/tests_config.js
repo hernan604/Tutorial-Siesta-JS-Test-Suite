@@ -1,11 +1,6 @@
 var Harness = Siesta.Harness.Browser.ExtJS;
 
 Harness.configure({
-    title       : 'Siesta Examples',
-    keepResults : false
-})
-
-Harness.configure({
     title             : 'Joose test suite',
     verbosity         : 0,
 // cachePreload       : true,
@@ -43,39 +38,11 @@ Harness.configure({
         "func",
         "$",
         "jQuery",
-        "TemplatePadraoCelulaJogo",
-        "TemplatePadraoAgrupamento",
-        "View",
-        "Debugger",
-        "SimuladorUtils",
-        "Simulador",
-        "AjaxObj",
-        "FaseReplaceTime",
-        "Fase",
-        "Jogo",
-        "Equipe",
-        "Agrupamento",
-        "TemplatePadraoGrupoUnico",
-        "TemplatePadraoPontosCorridosGrupos",
-        "TemplatePadraoMataMata",
-        "TemplatePadraoMataMataIdaVolta",
-        "TemplatePadraoJogosEntreGrupos",
-        "ClassificacaoBase",
-        "ClassificacaoGrupoUnico",
-        "ClassificacaoJogosEntreGrupos",
-        "ClassificacaoPontosCorridosGrupos",
-        "ClassificacaoMataMata",
-        "ClassificacaoMataMataIdaVolta",
-        "view",
-        "ultima_classificaca_gerada",
-        "ultima_classificaca_gerada_arr",
-        "simulador_calls",
-        "simular_jogo"
     ],
     preload : [
-        "/t/lib/jquery.js",
-        "/t/lib/joose.js",
-        "/t/lib/tests_base.js",
+        "./lib/jquery.js",
+        "./lib/joose.js",
+        "./lib/tests_base.js",
 //      ( window.location.href.match( "DESENVOLVIMENTO" ) ) ? "/DEV/lib/tests-base.js"  : "./PROD/lib/tests-base.js"
     ]
 })
@@ -86,15 +53,15 @@ Harness.start(
       group: "HOME PAGE",
       forceDOMVisible: true,
       items : [
-        "/t/modulo1_so_js.t.js",
+        "./modulo1_so_js.t.js",
         {
          forceDOMVisible: true,
-          hostPageUrl   : "/site/modulo1.htm",
-          url           : "/t/modulo1.t.js",
+          hostPageUrl   : "../site/modulo1.htm",
+          url           : "./modulo1.t.js",
           preload: [
-            "/t/lib/jquery.js",
-            "/t/lib/joose.js",
-            "/t/lib/tests_base.js"
+            "./lib/jquery.js",
+            "./lib/joose.js",
+            "./lib/tests_base.js"
           ]
         }
       ]
@@ -103,7 +70,7 @@ Harness.start(
       group: "Módulo: Calculadora",
       forceDOMVisible: true,
       items : [
-        "/t/modulo2.t.js",
+        "./modulo2.t.js",
       ]
     }
 )
