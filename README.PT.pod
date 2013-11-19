@@ -1,3 +1,142 @@
-Este tutorial ensina maneiras para automatizar testes com a suíte de testes Siesta JS.
+=encoding utf8
 
-abrir o arquivo de index.htm
+=head1 Tutorial Siesta JS - Test Driven Development
+
+=head2 SINOPSE
+
+Este tutorial ensina boas práticas para automatizar testes durante o desenvolvimento de aplicações.
+
+=head2 DESCRIÇÃO
+
+Neste tutorial, irei demonstrar meios para desenvolvimento voltado a testes.
+
+Ao desenvolver um módulo js, é comum que criar uma classe, ou um arquivo .js com alguns métodos e variáveis. E logo depois esse módulo/script é carregado em uma página de testes (html). Em seguida abre-se a página no browser. 
+Assim que o desenvolvimento continua, o desenvolvedor aperta F5 para atualizar a tela verificar se a alteração funcionou de fato. Isso é feito até que o módulo parece funcionar e dai essa bagaça sobe para produção. E funciona...
+
+até que ...
+
+outra pessoa ou até você mesmo precisa mexer nesse módulo para fazer alterações. 
+
+O X da questão é que esse módulo aparenta ter algumas funcionalidades, mas de cara vc pode não saber exatamente quais as funcionalidades que o módulo de fato faz... então vc pode alterar um ponto para atender um determinado requisito, mas derepente essa alteração pode quebrar um outro ponto no módulo que não está sendo chamado na sua página de teste (HTM).
+
+Os testes ajudam a prevenir exatamente esse tipo de comportamento. 
+Uma aplicação bem testada ajuda a garantir que se vc mexer 'aqui' não irá quebrar 'ali'.
+
+Isso é importante pois durante o desenvolvimento de um módulo, o desenvolvedor tem tudo fresco na cabeça... nesse momento ele conhece todos os métodos do módulo e sabe de cor todas as funcionalidades e sabe exatamente o que o módulo faz ou não faz. 
+
+Então imagine que o módulo está pronto e funcionando em produção por 2 anos... quando derepente, aparece uma alteração em funcionalidade.... e agora? o módulo vai ser alterado... será que vai quebrar algo ? 
+
+=head2 O que são testes
+
+Testes são 'provas' de que funcionalidades estão funcionando como deveriam. 
+
+Vamos supor que eu tenho um módulo de calculadora, que consiste basicamente em métodos:
+
+  somar = function ( a, b ) { 
+      return a + b;
+  }
+
+  subtrair = function ( a, b ) { 
+      return a - b;
+  }
+
+  multiplicar = function ( a , b ) {
+      return a * b;
+  }
+
+  dividir = function ( a , b ) { 
+      return a / b;
+  }
+
+como testar isso e garantir que estão funcionando ?
+
+com testes... mas como ?
+
+muito simples, veja um exemplo para testar o método de soma:
+
+  ok( somar( 1 , 2 ) == 3, ' soma de 1 com 2 resulta em 3 ' )
+
+primeiro, vou explicar o que é o 'ok':  O método ok é bastande comum nas suítes de testes de diferentes linguagens. 
+
+As suites de testes disponibilizam alguns métodos padrão, são eles:
+
+  ok( value, desc )
+
+como vc pode perceber, o método ok recebe 2 variáveis. Na primeira, é um valor, ou o resultado de alguma operação/método. Se esse value resultar em true, o teste vai passar. ex:
+
+  ok( somar( variavel1, variavel2 ) == variavel3 , "vai executar o metodo somar com variavel1 e variavel2, e o resultado disso tem que ser igual a variavel3 " )
+
+e se por algum motivo alguem ou vc mesmo alterar erroneamente o método somar, o teste vai começar a falhar e vc vai saber que algo está errado nesse método. Ai vc investiga e resolve.
+
+Tambem muito comum é o método is:
+
+  is( valor1, valor2, desc )
+
+exemplo:
+  
+  is( somar(1,2), 3, " o valor do primeiro argumento é igual ao segundo arqumento " )
+
+Outro método de assertion de testes bastante comum é o isDeeply: 
+
+  isDeeply( obj1, obj2, desc )
+
+Que basicamente recebe dois objetos e verifica se eles tem os mesmos itens. Não precisam estar necessariamente na mesma ordem mas tem que eles tem que existir tanto em um objeto quanto no outro. 
+
+Exemplo que vai dar certo:
+
+  isDeeply(   { id: 2, nome: 'João', sobrenome: 'Silva', idade: 50  }    ,     {  sobrenome: 'Silva', id: 2,  idade: 51, nome: 'João' }    , " verifica se o primeiro objeto tem os mesmos itens com valores similares ao segundo objeto"  )
+
+Outro jeito de fazer seria passar um método e verificar se volta o resultado esperado, por exemplo:
+
+  isDeeply(   buscar_pessoa( {id : 2} )    ,     {  sobrenome: 'Silva', idade: 51, nome: 'João' }    , " verifica se o primeiro objeto tem os mesmos itens com valores similares ao segundo objeto"  )
+
+Supondo que o método buscar_pessoa retorne um objeto conforme o esperado ^^, o teste vai passar. E se por algum motivo esse método retornar coisas distintas, o teste vai falhar.
+
+Outro exemplo é o método like que recebe um valor e uma regex e verifica se a regex bate com o valor passado.
+
+  like( string, regex, desc )
+
+  like( 73213782581, /^\d+$/ , "tem apenas números no primeiro argumento" )
+
+
+
+Então a idéia central dos testes, é provar que as funcionalidades implementadas funcionam conforme o esperado. A idéia é registrar todas as funcionalidades nos testes e provar que todas elas funcionam. Dessa maneira, o desenvolvedor poderá mexer no código e executar os testes depois e verificar rapidamente se alguma funcionalidade não está funcionando.
+
+Isso traz tranquilidade à empresa, pois se tudo está testado, a empresa pode colocar novos funcionários e eles podem começar a implementar funcionalidades e criar testes, e garantir que as novas funcionalidades funcionam e ao mesmo tempo, garantir que eles não quebraram nenhuma funcionalidade que já estava implementada.
+
+=head2 Testes de interface
+
+Outro tipo de teste são os testes que envolvem interface. 
+
+Por exemplo, ao clicar num botão 'fundo azul', o fundo da tela tem que ficar azul. Como testar isso ?
+
+Isso tambem é possível com o siesta JS. e é bastante fácil, segue um exemplo: 
+
+  t.chain(
+    {
+      action: "moveCursorTo",                         // acão escolhida
+      target: ".botoes > .botao_muda_fundo_pra_azul"  //seletor css
+    },
+    function ( next ) {
+      // valida se o botão está visível ( tambem consigo usar jquery se eu precisar.. que beleza hein... )
+      t.is( $( ".botoes > .botao_muda_fundo_pra_azul" ).is( ":visible" ), true, " Que beleza, o botão está visível !!" )
+      next(); //este método vai chamar o próximo teste dentro deste chain (cadeia de testes)
+    },
+    {
+     action: "click",                                   //agora tome a ação de clicar
+     target: ".botoes > .botao_muda_fundo_pra_azul"     //no botão com este seletor
+    },
+    function ( next ) {
+
+      
+      // Agora, verifique o fundo se o fundo da tela ficou azul conforme esperado;
+      var cor_de_fundo_esperada = "#0000FF";
+      t.is( jQuery("body").css("background-color") , "#0000FF", " O fundo ficou azul, massa !!" )
+      // validação simples que verifica se o fundo está azul
+
+      next(); 
+    },
+  )
+
+
+=head2 
