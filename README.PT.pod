@@ -104,6 +104,8 @@ Então a idéia central dos testes, é provar que as funcionalidades implementad
 
 Isso traz tranquilidade à empresa, pois se tudo está testado, a empresa pode colocar novos funcionários e eles podem começar a implementar funcionalidades e criar testes, e garantir que as novas funcionalidades funcionam e ao mesmo tempo, garantir que eles não quebraram nenhuma funcionalidade que já estava implementada.
 
+Não ter testes é uma roleta russa... hora da certo, hora pode dar errado.
+
 =head2 Testes de interface
 
 Outro tipo de teste são os testes que envolvem interface. 
@@ -113,30 +115,53 @@ Por exemplo, ao clicar num botão 'fundo azul', o fundo da tela tem que ficar az
 Isso tambem é possível com o siesta JS. e é bastante fácil, segue um exemplo: 
 
   t.chain(
+    //leve o mouse até o seletor abaixo
     {
       action: "moveCursorTo",                         // acão escolhida
       target: ".botoes > .botao_muda_fundo_pra_azul"  //seletor css
     },
+
+    //agora valida se o botão está visível... use jquery se quiser =)
     function ( next ) {
       // valida se o botão está visível ( tambem consigo usar jquery se eu precisar.. que beleza hein... )
       t.is( $( ".botoes > .botao_muda_fundo_pra_azul" ).is( ":visible" ), true, " Que beleza, o botão está visível !!" )
       next(); //este método vai chamar o próximo teste dentro deste chain (cadeia de testes)
     },
+
+    //agora clica no botão
     {
      action: "click",                                   //agora tome a ação de clicar
      target: ".botoes > .botao_muda_fundo_pra_azul"     //no botão com este seletor
     },
-    function ( next ) {
 
-      
+    //e finalmente verifica se a cor de fundo mudou conforme o esperado
+    function ( next ) {
       // Agora, verifique o fundo se o fundo da tela ficou azul conforme esperado;
       var cor_de_fundo_esperada = "#0000FF";
       t.is( jQuery("body").css("background-color") , "#0000FF", " O fundo ficou azul, massa !!" )
       // validação simples que verifica se o fundo está azul
 
       next(); 
-    },
+    }
   )
 
+Ou talvez seu projeto precise clicar num botão para abrir um menu, tudo isso pode ser testado segundo passos similares ao passo descrito acima.
 
-=head2 
+=head2 Desenvolvimento com testes
+
+Existem basicamentes 3 jeitos de desenvolver uma aplicação:
+
+1. Criar classes e implementação e só depois os testes
+2. Criar classes, testes e depois implementar
+3. Criar testes, depois classes e depois implementar
+
+Não existe um jeito que seja definitivamente o melhor, todos tem seus prós e contras... e no final a decisão é pessoal e vai contar a experiência do desenvolvedor ao passar pelos 3 tipos e concluir qual serve melhor, para ele.
+
+
+Atualmente eu prefiro criar classes e criar testes ao mesmo tempo. Assim o teste é a implementação da minha classe.
+
+O 3 é bastante usado inclusive em Dojôs, pois uma das premissas do dojô é que o teste deve ser feito primeiro e só depois deve ser feita a implementação do teste. Ou seja, a implementação da classe tem que atender à especificação do teste. Isso ajuda a ter uma idéia de como será a utilização da classe criada, pois é possível definir um uso bacana sem ter escrito a classe ainda.
+
+É questão de costume.
+
+=head2 Testando com Siesta JS
