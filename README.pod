@@ -479,3 +479,18 @@ Vou colar um dos arquivos aqui ( modulo1_so_js.t.js ) , para analisar
 
 Agora fica para você olhar os arquivos que estão dentro de do diretório /t/
 E rodar os testes e analisar como eles funcionam.
+
+
+=head2 Referências e links relacionados
+
+https://github.com/SenchaProSvcs/UnitTestDemo/tree/master/resources/siesta-1.1.5-lite/docs/guides/siesta_getting_started
+
+http://www.bryntum.com/docs/siesta/#!/api/Siesta.Test.Action.Drag
+
+http://www.sencha.com/blog/introducing-siesta-a-testing-tool-for-ext-js/
+
+http://www.bryntum.com/examples/siesta-latest/examples/browse-all-desktop.html
+
+http://www.youtube.com/watch?v=FP9U6XVdN_U
+
+
