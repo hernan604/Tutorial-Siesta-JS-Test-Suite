@@ -61,7 +61,7 @@ Os testes de interface envolvem automatizar o mouse para clicar na tela. É a me
 
 Como mencionado, os testes unitários envolvem instanciar uma classe e testar os métodos dessa classe. Ou seja, chamar possivelmente todos os métodos da classe e verificar se eles estão retornando os valores esperados. 
 
-Indo além, a cálculo da abrangencia de testes tem até um nome: 'test coverage':
+Indo além, o cálculo da abrangencia de testes tem até um nome: 'test coverage':
 
 "Test coverage" é um cálculo que indica a porcentagem de métodos executados durante os testes. Ou seja, um test coverage de 100% indica que todos os métodos da aplicação foram executados durante o teste. Isso não quer dizer necessariamente que eles estão funcionando, mas pelomenos indica que estão sendo executados durante os testes. 
 *** no início você não precisa saber o que é test coverage, mas conforme sua app creça, provavelmente será interessante você ativar isso no seu teste. O siesta traz essa opção.
