@@ -8,6 +8,8 @@ Este tutorial ensina boas práticas para automatizar testes durante o desenvolvi
 
 Vou utilizar o Siesta JS pois é a suíte de testes mais completa e prática que encontrei. Além de ser JS puro e rodar em qualquer navegador sem precisar instalar nada, ela é feita em Joose-JS e faz tudo que o qunitjs faz, e faz tudo que o selenium faz.
 
+curiosidade: o criador do Joose-JS criou o Siesta e trabalha na bryntum
+
 =head2 DESCRIÇÃO
 
 Neste tutorial, irei demonstrar meios para desenvolvimento voltado a testes.
@@ -304,21 +306,25 @@ Feito isso é só adicionar o teste_utils.js como "preload" no arquivo de config
 
 =head2 Testando com Siesta JS
 
-Agora vou demonstrar como foi criado o projeto de exemplo que acompanha este tutorial.
+Agora vou demonstrar o uso e alguns detalhes do projeto de exemplo que acompanha este tutorial.
 
 Você vai precisar de um webserver. (apache, nginx etc) para abrir rodar os testes.
 
-1. Copie todos os arquivos deste tutorial para um diretório no seu servidor, e depois acesse t/index.htm.
+Se estiver usando perl é só rodar um: 
+  
+  plackup plackpage.psgi
 
-Por conveniência, eu escolhi jogar tudo na raiz, e acesso da seguinte maneira: Recomendo fazer o mesmo ao menos na primeira vez
+1. Copie todos os arquivos deste tutorial para um diretório no seu servidor, e depois acesse diretorio/t/index.htm.
+
+Por conveniência, eu escolhi jogar tudo na raiz, e acesso da seguinte maneira: 
 
   http://localhost:5000/t/index.htm
 
-Tudo começa ai. Literalmente, abra o source do arquivo. Você vai perceber que ele chama arquivos externos e arquivos locais. Exemplo:
+Tudo começa ai. Literalmente, abra o source do arquivo (ctrl+U). Você vai perceber que ele chama arquivos externos e arquivos locais. Exemplo:
 
   <script type="text/javascript" src="siesta-all.js"></script>
 
-esse é o arquivo que contém a applicação do siesta.
+esse é o arquivo que contém a applicação do siesta. (você não mexerá nesse arquivo)
 
 Repare no próximo arquivo:
 
@@ -326,7 +332,7 @@ Repare no próximo arquivo:
 
 Esse é o arquivo central das configurações de teste. Tudo começa nesse arquivo.
 
-Vou colar ele abaixo e explicar através de comentários como ele funciona:
+Vou colar trechos dele abaixo e explicar através de comentários como ele funciona:
 
   Harness.configure({
       title             : 'Exemplo de testes',    //apenas um título para os testes
@@ -424,15 +430,17 @@ Vou colar ele abaixo e explicar através de comentários como ele funciona:
       }
   )
 
-Lembre-se sempre que o teste estará rodando no browser, e tudo no browser são páginas.. então tem um
+Lembre-se sempre que o teste estará rodando no browser, e tudo no browser são páginas.. e todas as páginas tem por padrão um:
 
   window
   window.document
   body
 
-etc... é uma página... vc pode usar jquery e criar o markup on the fly... ou pode rodar o teste em cima de uma página (url). A escolhe é sua.
+etc... é uma página... vc pode usar jquery e criar o markup on-the-fly... ou pode rodar o teste em cima de uma página (url). A escolhe é sua.  
 
-Um exemplo onde crio o markup on the fly está na parte "Estrutura do arquivo de testes"
+Apenas lembre-se dos problemas de cross domain.. ou seja, se optar por rodar teste em cima de páginas, o teste precisa estar no mesmo domínio das páginas acessadas.
+
+Um exemplo onde crio o markup on-the-fly está na parte "Estrutura do arquivo de testes"
 
 =head2 Estrutura do arquivo de testes
 
@@ -580,8 +588,27 @@ Vou colar um dos arquivos aqui ( modulo1_so_js.t.js ) , para analisar
 
   })
 
-Agora fica para você olhar os arquivos que estão dentro de do diretório /t/
-E rodar os testes e analisar como eles funcionam.
+Agora fica para você olhar, rodar os testes e analisar como eles funcionam.
+
+Os arquivos de teste estão dentro do diretório /t/
+
+=head2 Exemplos do fabricante ( Bryntum )
+
+O fabricante do siesta, disponibilizou alguns exemplos de teste que envolvem diferentes situações e podem ser acessados na url:
+
+  http://www.bryntum.com/examples/siesta-latest/examples/browse-all-desktop.html
+
+=head2 Quem usa os produtos da Bryntum ?
+
+Segundo o site deles, as seguintes empresas aparecem como clientes:
+
+  United Nations
+  Deutshce Telekom
+  Apple
+  Google
+  Adobe
+  EMC²
+  Samsung
 
 =head2 Referências e links relacionados
 
@@ -591,8 +618,6 @@ http://www.bryntum.com/docs/siesta/#!/api/Siesta.Test.Action.Drag
 
 http://www.sencha.com/blog/introducing-siesta-a-testing-tool-for-ext-js/
 
-http://www.bryntum.com/examples/siesta-latest/examples/browse-all-desktop.html
-
 http://www.youtube.com/watch?v=FP9U6XVdN_U
 
 =head4 AUTHOR
@@ -601,4 +626,4 @@ Hernan Lopes
 
 =head4 Contribuidores
 
-Coloque seu nome aqui
+Se você ajudou a melhorar este documento, adicione seu nome aqui e faça pull request.
