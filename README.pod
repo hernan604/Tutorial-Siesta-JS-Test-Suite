@@ -33,7 +33,7 @@ Alem de garantir que as coisas funcionam, os testes tambem servem de exemplo de 
 
 Tambem ajuda as pessoas novas na empresa a não errar. Pois o novato poderá mexer tranquilamente no código e executar os testes e ter a certeza que ele não quebrou funcionalidades que ele nem sabe que existe.
 
-Lembre-se: No final tudo é software e softwares tem bugs. E quanto mais testes melhor e provavelmente menos bugs aparecerão.
+E como sempre: No final tudo é software e softwares tem bugs. E quanto mais testes melhor e provavelmente menos bugs aparecerão.
 
 =head2 O que são testes
 
@@ -159,11 +159,17 @@ Não ter testes é uma roleta russa... hora da certo, hora pode dar errado. E no
 
 =head2 Testes de interface
 
-Outro tipo de teste são os testes que envolvem interface.
+Outro tipo de teste são os testes que envolvem interface. Este tipo de teste normalmente automatiza a ação do mouse. 
 
-Por exemplo, ao clicar num botão 'fundo azul', o fundo da tela tem que ficar azul. Como testar isso ?
+Por exemplo, ao clicar num botão 'fundo azul', o fundo da tela tem que ficar azul.  E óbviamente mas nem tanto, não pode ter nada por cima desse botão na hora do clique. Caso contrário não irá funcionar para o usuário final. 
 
-Isso tambem é possível com o siesta JS. e é bastante fácil, segue um exemplo:
+O teste de interface consegue automatizar o mouse, ou seja, se por algum motivo de alteração css ou sei lá o que quebrar o layout com uma div transparente por cima do botão, o teste vai acusar que não conseguiu clicar.
+
+Como testar isso ?
+
+Isso tambem é possível com o siesta JS. Não é nada de outro mundo. Só é necessário registrar as ações junto com seletores dentro do teste. ou seja: 'clicar' em 'div.seletor.bla'
+
+Segue um exemplo real:
 
   t.chain(
     //leve o mouse até o seletor abaixo
@@ -196,7 +202,30 @@ Isso tambem é possível com o siesta JS. e é bastante fácil, segue um exemplo
     }
   )
 
-Ou talvez seu projeto precise clicar num botão para abrir um menu, tudo isso pode ser testado segundo passos similares ao passo descrito acima.
+Ou talvez seu projeto precise clicar num botão para abrir um menu e em seguida validar se o menu está visível, tudo isso pode ser automatizado e testado seguindo passos similares ao teste acima.
+
+Exemplo que abre menu e verifica se item está visível:
+
+  t.chain(
+
+    //no estágio inicial, validar se o menu NÃO está visível ainda
+    function ( next ) {
+      t.is( $( "div.menu > li.nivel_1 > .itens_menu" ).is( ":visible" ), false, " O menu ainda não está visível" )
+      next(); 
+    },
+
+    //leve o mouse até o seletor abaixo
+    {
+      action: "moveCursorTo",
+      target: "div.menu > li.nivel_1"
+    },
+
+    //agora valida se o menu está visível
+    function ( next ) {
+      t.is( $( "div.menu > li.nivel_1 > .itens_menu" ).is( ":visible" ), true, " O menu está visível" )
+      next(); 
+    }
+  )
 
 =head2 Desenvolvimento com testes
 
