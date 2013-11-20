@@ -39,7 +39,7 @@ E como sempre: No final tudo é software e softwares tem bugs. E quanto mais tes
 
 =head2 O que são testes
 
-Testes são 'provas' de que funcionalidades do software estão funcionando como deveriam.
+Testes são 'provas' que funcionalidades do software estão funcionando como deveriam.
 
 Os tipos de testes mais conhecidos são:
 
