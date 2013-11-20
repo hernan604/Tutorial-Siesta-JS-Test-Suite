@@ -12,27 +12,34 @@ Vou utilizar o Siesta JS pois é a suíte de testes mais completa e prática que
 
 Neste tutorial, irei demonstrar meios para desenvolvimento voltado a testes.
 
-Ao desenvolver um módulo js, é comum que criar uma classe, ou um arquivo .js com alguns métodos e variáveis. E logo depois esse módulo/script é carregado em uma página de testes (html). Em seguida abre-se a página no browser.
-Assim que o desenvolvimento continua, o desenvolvedor aperta F5 para atualizar a tela verificar se a alteração funcionou de fato. Isso é feito até que o módulo parece funcionar e dai essa bagaça sobe para produção. E funciona...
+Ao desenvolver um módulo em javascript, é comum criar classes/arquivos/scripts com métodos e variáveis. E utilizá-los imediatamente em uma página de testes (html).
+Assim que o desenvolvimento continua, o desenvolvedor aperta F5 para atualizar a tela e verificar se a alteração que ele fez funcionou de fato. Isso é feito até que o módulo parece funcionar e dai essa bagaça sobe para produção. E funciona...
 
 até que ...
 
 outra pessoa ou até você mesmo precisa mexer nesse módulo para fazer alterações.
 
-O X da questão é que esse módulo aparenta ter algumas funcionalidades, mas de cara vc pode não saber exatamente quais as funcionalidades que o módulo de fato faz... então vc pode alterar um ponto para atender um determinado requisito, mas derepente essa alteração pode quebrar um outro ponto no módulo que não está sendo chamado na sua página de teste (HTM).
+O X da questão é que o tempo passa, e as vezes o próprio desenvolvedor esquece como o módulo funciona exatamente e quais funcionalidades foram implementadas. Isso sem contar quando o desenvolvedor sai da empresa e ninguem sabe como funciona. Se isso acontecer e o módulo não tiver testes que comprovem que ele funciona, só resta cruzar os dedos e torcer que nada 'quebre' ao realizar alguma alteração no código. Nesse cenário, as vezes o desenvolvedor mexe aqui e quebra lá, e muitas vezes essa quebrada não fica aparente e só aparece quando alguem reclama que quebrou. 
 
-Os testes ajudam a prevenir exatamente esse tipo de comportamento.
-Uma aplicação bem testada ajuda a garantir que se vc mexer 'aqui' não irá quebrar 'ali'.
+Esse é o pior cenário pois essa quebrada pode envolver custos, por exemplo, se quebrar uma publicidade e ninguem perceber logo de cara... no final do mês não vai pingar aquela grana de publicidade... ou ainda, o desenvolvedor faz o trabalho e acha que resolveu a parte solicitada, e daqui uns dias ele recebe um email dizendo que quebrou alguma outra coisa que ele nem sabia que existia... isso vai gerar mais horas de trabalho e consequentemente mais custo para a empresa.
 
-Isso é importante pois durante o desenvolvimento de um módulo, o desenvolvedor tem tudo fresco na cabeça... nesse momento ele conhece todos os métodos do módulo e sabe de cor todas as funcionalidades e sabe exatamente o que o módulo faz ou não faz.
+Os testes ajudam a prevenir esse tipo de situação e trazem a tranquilidade que tudo continua funcionando após alterar o código. E tambem ajudam a reduzir custos.
 
-Então imagine que o módulo está pronto e funcionando em produção por 2 anos... quando derepente, aparece uma alteração em funcionalidade.... e agora? o módulo vai ser alterado... será que vai quebrar algo ?
+Mais testes = mais qualidade (de software)
+
+Uma aplicação bem testada ajuda a garantir que se vc mexer 'aqui' não irá quebrar 'ali'. Os testes tem que ser bem pensados porque se não abrangirem todas as situações, a aplicação estará sujeita a falha.  
+
+Alem de garantir que as coisas funcionam, os testes tambem servem de exemplo de implementação. Pois qualquer pessoa pode abrir o teste e ver como as funcionalidades foram implementadas (a nível de código). Isso evita a necessidade de interromper o colega para perguntar como funcionam as coisas... isso tambem quer dizer redução de custo.
+
+Tambem ajuda as pessoas novas na empresa a não errar. Pois o novato poderá mexer tranquilamente no código e executar os testes e ter a certeza que ele não quebrou funcionalidades que ele nem sabe que existe.
+
+Lembre-se: No final tudo é software e softwares tem bugs. E quanto mais testes melhor e provavelmente menos bugs aparecerão.
 
 =head2 O que são testes
 
-Testes são 'provas' de que funcionalidades estão funcionando como deveriam.
+Testes são 'provas' de que funcionalidades do software estão funcionando como deveriam.
 
-Vamos supor que eu tenho um módulo de calculadora, que consiste basicamente em métodos:
+Vamos supor que eu acabei de fazer e preciso testar um módulo de calculadora, que consiste nos métodos:
 
   somar = function ( a, b ) {
       return a + b;
