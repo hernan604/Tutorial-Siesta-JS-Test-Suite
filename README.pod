@@ -64,6 +64,7 @@ Como mencionado, os testes unitários envolvem instanciar uma classe e testar os
 Indo além, o cálculo da abrangencia de testes tem até um nome: 'test coverage':
 
 "Test coverage" é um cálculo que indica a porcentagem de métodos executados durante os testes. Ou seja, um test coverage de 100% indica que todos os métodos da aplicação foram executados durante o teste. Isso não quer dizer necessariamente que eles estão funcionando, mas pelomenos indica que estão sendo executados durante os testes. 
+
 *** no início você não precisa saber o que é test coverage, mas conforme sua app creça, provavelmente será interessante você ativar isso no seu teste. O siesta traz essa opção.
 
 Vamos supor que eu acabei de fazer e preciso testar um módulo de calculadora, que consiste nos métodos:
@@ -242,10 +243,10 @@ Exemplo que abre menu e verifica se item está visível:
 
 A grosso modo existe 4 jeitos de desenvolver uma aplicação:
 
-1. Criar classes e implementação e só depois os testes
-2. Criar classes e testes juntos e depois implementar
-3. Criar testes, depois classes e depois implementar
-4. Mandar alguem fazer o trabalho usando os métodos 1, 2 ou 3
+  1. Criar classes e implementação e só depois os testes
+  2. Criar classes e testes juntos e depois implementar
+  3. Criar testes, depois classes e depois implementar
+  4. Mandar alguem fazer o trabalho usando os métodos 1, 2 ou 3
 
 Não existe um jeito que seja definitivamente o melhor, todos tem seus prós e contras... e no final a decisão é pessoal e vai contar a experiência do desenvolvedor ao passar pelos 3 tipos e concluir qual serve melhor, para ele.
 
