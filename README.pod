@@ -269,16 +269,15 @@ Por exemplo, se vc está criando um módulo/plugin para um frameworkX. Seu módu
 
 Outro ponto importante é separar bem os métodos... para facilitar o teste. Ou seja, um método de 1000 linhas provavelmente faz coisa demais e vai ficar difícil testar essa joça. Então é ideal que o método seja quebrado em partes menores e em outros métodos para que seja possível testar eles de maneira independente. É ideal que cada método resolva problemas específicos ao invés de ter métodos que mais parecem uma aplicação completa. Isso facilita muito o re-aproveita mento de código para DRY. E permite que seja criado testes unitários para cada um dos métodos pequenos que resolvem problemas específicos.
 
+=head2 DRY - Dont repeat yourself (não repita código)
 
-=head2 DRY - Dont repeat yourself (não repida código)
-
-Até nos testes é uma boa prática não repetir código.
+Até nos testes é uma boa prática não repetir código e reaproveitar métodos/códigos.
 
 Vamos supor que vc precisa de alguns métodos que são comums para testar todos os seus módulos.
 
-Se optar pelo pior jeito, vai colar o trecho em cada arquivo de teste.
+Se optar pelo pior jeito, vai copiar e colar o trecho necessário em cada arquivo de teste.
 
-Se optar pelo melhor jeito, vai criar um arquivo com os métodos em comum. e carregar esse arquivo junto com cada teste.
+Se optar pelo melhor jeito, vai criar um único arquivo com os métodos em comum. e carregar esse arquivo junto com cada teste.
 
 Por exemplo, vamos supor que vc tem 3 arquivos de testes, e pra testar, é necessário logar em um sistema:
 
@@ -297,9 +296,11 @@ Por exemplo, vamos supor que vc tem 3 arquivos de testes, e pra testar, é neces
 No cenário ideal é possível salvar esse método de login dentro de um arquivo, ex: login.js e carregar ele junto com os testes, ex:
 
   teste_utils.js // contem o metodo de login e outros métodos comuns e necessários aos testes
-  arquivo_teste1.js
-  arquivo_teste2.js
-  arquivo_teste3.js
+  arquivo_teste1.js   //este teste vai carregar teste_utils.js que contem o método de login
+  arquivo_teste2.js   //este teste vai carregar teste_utils.js que contem o método de login
+  arquivo_teste3.js   //este teste vai carregar teste_utils.js que contem o método de login
+
+Feito isso é só adicionar o teste_utils.js como "preload" no arquivo de configuração do siesta ( veja t/tests_config.js ). Assim você evita copiar e colar a mesma coisa em cada arquivo de teste.
 
 =head2 Testando com Siesta JS
 
