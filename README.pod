@@ -39,23 +39,44 @@ Lembre-se: No final tudo é software e softwares tem bugs. E quanto mais testes 
 
 Testes são 'provas' de que funcionalidades do software estão funcionando como deveriam.
 
+Os tipos de testes mais conhecidos são:
+
+  testes unitários
+
+Os testes unitários envolvem testar os valores retornados por métodos, classes, scripts
+
+  testes de interface
+
+Os testes de interface envolvem automatizar o mouse para clicar na tela. É a mesma coisa que o desenvolvedor faz durante o desenvolvimento, mas no teste fica automatizado e registrado as ações que devem ser testadas.
+
+=head2 Testes unitários
+
+Como mencionado, os testes unitários envolvem instanciar uma classe e testar os métodos dessa classe. Ou seja, chamar possivelmente todos os métodos da classe e verificar se eles estão retornando os valores esperados. Isso tem um nome chamado 'test coverage'.
+
+Test coverage é um cálculo que indica a porcentagem de métodos executados durante os testes. Ou seja, um test coverage de 100% indica que todos os métodos da aplicação foram executados durante o teste. Isso não quer dizer necessariamente que eles estão funcionando, mas pelomenos indica que estão sendo executados durante os testes.
+
 Vamos supor que eu acabei de fazer e preciso testar um módulo de calculadora, que consiste nos métodos:
 
-  somar = function ( a, b ) {
-      return a + b;
-  }
+  Class( "Calculadora", {
+    methods: {
+      somar : function ( a, b ) {
+          return a + b;
+      },
 
-  subtrair = function ( a, b ) {
-      return a - b;
-  }
+      subtrair : function ( a, b ) {
+          return a - b;
+      },
 
-  multiplicar = function ( a , b ) {
-      return a * b;
-  }
+      multiplicar : function ( a , b ) {
+          return a * b;
+      },
 
-  dividir = function ( a , b ) {
-      return a / b;
-  }
+      dividir : function ( a , b ) {
+          return a / b;
+      }
+    }
+  } )
+
 
 como testar isso e garantir que estão funcionando ?
 
@@ -65,18 +86,20 @@ muito simples, vou criar um arquivo 001-testes_basicos_calculadora.js e adiciona
 
 Por exemplo, um teste para provar que o método de somar e multiplicar funcionam:
 
-  ok( somar( 1 , 2 )    == 3, ' soma de 1 com 2 resulta em 3 ' ) #1+2 tem que ser igual a 3
-  ok( somar( 92 , 50 )  == 142, ' soma de 92 com 50 resulta em 142 ' )
-  ok( somar( 100 , 2 )  == 102, ' soma de 100 com 2 resulta em 102 ' )
+  var calc = new Calculadora();
 
-  ok( multiplicar( 100 , 2 )  == 200, ' 100 vezes 2 tem que dar 200 ' )
-  ok( multiplicar( 200 , 3 )  == 600, ' 200 vezes 3 tem que dar 600 ' )
+  ok( calc.somar( 1 , 2 )    == 3, ' soma de 1 com 2 resulta em 3 ' ) #1+2 tem que ser igual a 3
+  ok( calc.somar( 92 , 50 )  == 142, ' soma de 92 com 50 resulta em 142 ' )
+  ok( calc.somar( 100 , 2 )  == 102, ' soma de 100 com 2 resulta em 102 ' )
 
-  ok( dividir( 200 , 2 )  == 100, ' 200 vezes 3 tem que dar 600 ' )
+  ok( calc.multiplicar( 100 , 2 )  == 200, ' 100 vezes 2 tem que dar 200 ' )
+  ok( calc.multiplicar( 200 , 3 )  == 600, ' 200 vezes 3 tem que dar 600 ' )
+
+  ok( calc.dividir( 200 , 2 )  == 100, ' 200 vezes 3 tem que dar 600 ' )
 
 ou ainda, juntar vários métodos, ex:
   
-  ok( ( somar( 1, 2 )   *   multiplicar(   subtrair( 2,1 )  ,   20 ) ) == 60 , " tem que resultar em 60 "  )
+  ok( ( calc.somar( 1, 2 )   *   calc.multiplicar(   calc.subtrair( 2,1 )  ,   20 ) ) == 60 , " tem que resultar em 60 "  )
 
   # ou seja, o resultado dessas variáveis tem que resultar no resultado esperado
 
@@ -88,11 +111,11 @@ As suites de testes disponibilizam alguns métodos padrão, são eles:
 
 como vc pode perceber, o método ok recebe 2 variáveis. Na primeira, é um valor, ou o resultado de alguma operação/método. Se esse value resultar em true, o teste vai passar. ex:
 
-  ok( somar( variavel1, variavel2 ) == variavel3 , "vai executar o metodo somar com variavel1 e variavel2, e o resultado disso tem que ser igual a variavel3 " )
+  ok( calc.somar( variavel1, variavel2 ) == variavel3 , "vai executar o metodo somar com variavel1 e variavel2, e o resultado disso tem que ser igual a variavel3 " )
 
 e se por acaso resultar num false, o teste vai falhar, por exemplo:
 
-  ok( somar( 2 , 2 ) == 3, ' soma de 1 com 2 resulta em 3 ' ) # Este teste vai falhar pois 2+2 != 3
+  ok( calc.somar( 2 , 2 ) == 3, ' soma de 1 com 2 resulta em 3 ' ) # Este teste vai falhar pois 2+2 != 3
 
 e se por algum motivo alguem ou vc mesmo alterar erroneamente o método somar, o teste vai começar a falhar e vc vai saber que algo está errado nesse método. Ai vc investiga e resolve.
 
@@ -102,7 +125,7 @@ Tambem muito comum é o método is, que verifica se argumento1 é igual arqument
 
 exemplo:
 
-  is( somar(1,2), 3, " o valor do primeiro argumento é igual ao segundo arqumento " )
+  is( calc.somar(1,2), 3, " o valor do primeiro argumento é igual ao segundo arqumento " )
 
 Outro método de assertion de testes bastante comum é o isDeeply:
 
@@ -127,8 +150,6 @@ Outro exemplo é o método like que recebe um valor e uma regex e verifica se a 
   like( string, regex, desc )
 
   like( 73213782581, /^\d+$/ , "tem apenas números no primeiro argumento" )
-
-
 
 Então a idéia central dos testes, é provar que as funcionalidades implementadas funcionam conforme o esperado. Além de registrar todas as funcionalidades nos testes. Dessa maneira, o desenvolvedor poderá mexer no código e executar os testes depois e verificar rapidamente se alguma funcionalidade não está funcionando.
 
