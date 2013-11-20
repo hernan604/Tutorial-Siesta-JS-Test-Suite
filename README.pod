@@ -248,13 +248,16 @@ Assim como escrever um livro, é questão de costume. Alguns preferem começar p
 
 Esta é uma questão que não tem resposta definida. Cada projeto tem necessidades distintas e o teste deve atender o projeto.
 
-Com um teste mais macro, eu começaria a resposta por: Os testes devem provar o que a especificação pediu. Ou seja, aquele email do projeto que tem várias linhas de como deve funcionar, isso pode ser testado para garantir e provar que as solicitações foram atendidas.
+Com um teste mais macro, eu começaria a resposta com: Os testes devem provar o que a especificação pediu. Ou seja, aquele email do projeto que tem várias linhas de como deve funcionar, isso pode ser testado para garantir e provar que as solicitações foram atendidas.
 
 E entrando mais em detalhe, outras coisas tambem podem ser testadas, por exemplo:
 
-O módulo está colocando variáveis globais inesperadas ?
-Todos os métodos estão funcionando ?
-A interface funciona ?
+  Todos os métodos estão funcionando ?
+  O módulo está colocando variáveis globais inesperadas ?
+  A interface funciona ?
+  Ao extender essa classe, quebrou alguma outra classe ?
+  Se eu mexer numa classe, quebrou a retrocompatibilidade com outras classes ? 
+  Se eu reutilizar um módulo, posso criar testes que comprovam que funciona ?
 
 =head2 Como testar
 
@@ -262,9 +265,9 @@ Outra pergunta complicada. Depende do teste.
 
 A idéia principal é reproduzir o ambiente de produção e as situações e assim você poderá rodar o teste.
 
-Por exemplo, se vc está criando um módulo/plugin para um frameworkX. Seu módulo vai implementar apenas a funcionalidade respectivao ao módulo... mas no teste (dentro do teste e fora do módulo) vc pode incluir o framework X para o teste rodar e testar seu módulo.. dai vc implementa o teste similar à maneira que vc implementa em produção... a idéia é conseguir reproduzir, testar e provar que as coisas funcionam.
+Por exemplo, se vc está criando um módulo/plugin para um frameworkX. Seu módulo vai implementar apenas a funcionalidade respectiva ao módulo... mas no teste (dentro do teste e fora do módulo) vc pode incluir o framework X para o teste rodar e testar seu módulo.. dai vc implementa o teste similar à maneira que vc implementa em produção... a idéia é conseguir reproduzir, testar e provar que as coisas funcionam.
 
-Outro ponto importante é separar bem os métodos... para facilitar o teste. Ou seja, um método de 1000 linhas provavelmente faz coisa demais e vai ficar difícil testar essa joça. Então é ideal que o método seja quebrado em partes menores e em outros métodos para que seja possível testar eles de maneira independente. É ideal que cada método resolva problemas específicos.. ao invés de ter métodos que mais parecem uma aplicação completa. Isso facilita muito o re-aproveita mento de código para DRY. E permite que seja criado testes unitários para cada um destes métodos pequenos que resolvem problemas específicos.
+Outro ponto importante é separar bem os métodos... para facilitar o teste. Ou seja, um método de 1000 linhas provavelmente faz coisa demais e vai ficar difícil testar essa joça. Então é ideal que o método seja quebrado em partes menores e em outros métodos para que seja possível testar eles de maneira independente. É ideal que cada método resolva problemas específicos ao invés de ter métodos que mais parecem uma aplicação completa. Isso facilita muito o re-aproveita mento de código para DRY. E permite que seja criado testes unitários para cada um dos métodos pequenos que resolvem problemas específicos.
 
 
 =head2 DRY - Dont repeat yourself (não repida código)
