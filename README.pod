@@ -229,18 +229,18 @@ Exemplo que abre menu e verifica se item está visível:
 
 =head2 Desenvolvimento com testes
 
-Existem basicamentes 3 jeitos de desenvolver uma aplicação:
+A grosso modo existe 4 jeitos de desenvolver uma aplicação:
 
 1. Criar classes e implementação e só depois os testes
-2. Criar classes, testes e depois implementar
+2. Criar classes e testes juntos e depois implementar
 3. Criar testes, depois classes e depois implementar
+4. Mandar alguem fazer o trabalho usando os métodos 1, 2 ou 3
 
 Não existe um jeito que seja definitivamente o melhor, todos tem seus prós e contras... e no final a decisão é pessoal e vai contar a experiência do desenvolvedor ao passar pelos 3 tipos e concluir qual serve melhor, para ele.
 
+Atualmente eu prefiro criar classes e criar testes ao mesmo tempo. Assim o teste é a implementação da classe.
 
-Atualmente eu prefiro criar classes e criar testes ao mesmo tempo. Assim o teste é a implementação da minha classe.
-
-O 3 é bastante usado inclusive em Dojôs, pois uma das premissas do dojô é que o teste deve ser feito primeiro e só depois deve ser feita a implementação do teste. Ou seja, a implementação da classe tem que atender à especificação do teste. Isso ajuda a ter uma idéia de como será a utilização da classe criada, pois é possível definir um uso bacana sem ter escrito a classe ainda.
+O 3 é bastante usado e é regra em Dojôs, pois uma das premissas do dojô é que o teste deve ser feito primeiro e só depois devem ser feitas as classes. Ou seja, a implementação da classe tem que atender à especificação do teste. Isso ajuda a ter uma idéia de como será a utilização da classe criada, pois é possível definir um uso bacana sem ter escrito a classe ainda.
 
 Assim como escrever um livro, é questão de costume. Alguns preferem começar pelo índice e outros preferem escrever o livro antes.
 
