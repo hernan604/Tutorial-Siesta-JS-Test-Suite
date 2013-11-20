@@ -252,7 +252,7 @@ Não existe um jeito que seja definitivamente o melhor, todos tem seus prós e c
 
 Atualmente eu prefiro criar classes e criar testes ao mesmo tempo. Assim o teste é a implementação da classe.
 
-O 3 é bastante usado e é regra em Dojôs, pois uma das premissas do dojô é que o teste deve ser feito primeiro e só depois devem ser feitas as classes. Ou seja, a implementação da classe tem que atender à especificação do teste. Isso ajuda a ter uma idéia de como será a utilização da classe criada, pois é possível definir um uso bacana sem ter escrito a classe ainda.
+curiosidade: O 3 é bastante usado e é regra em Dojôs, pois uma das premissas do dojô é que o teste deve ser feito primeiro e só depois devem ser feitas as classes. Ou seja, a implementação da classe tem que atender à especificação do teste. Isso ajuda a ter uma idéia de como será a utilização da classe criada, pois é possível definir um uso bacana sem ter escrito a classe ainda.
 
 Assim como escrever um livro, é questão de costume. Alguns preferem começar pelo índice e outros preferem escrever o livro antes.
 
