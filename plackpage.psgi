@@ -1,58 +1,28 @@
+my $content_types = {
+    '.js'     => 'text/javascript',
+    '.ico'    => 'image/x-icon',
+    '.json'   => 'application/json',
+    '.css'    => 'text/css',
+    '.htm'    => 'text/html',
+    '.html'   => 'text/html',
+    '.jpg'    => 'image/jpeg',
+    '.jpeg'   => 'image/jpeg',
+    '.png'    => 'image/png',
+    '.woff'   => 'application/x-font-woff',
+    '.ttf'    => 'application/x-font-ttf',
+    '.gif'    => 'image/gif',
+};
+
 my $app = sub {
     my $env = shift;
-    if ($env->{PATH_INFO} eq '/favicon.ico' && -e ".".$env->{PATH_INFO} ) {
-        open my $fh, "<:raw", ".".$env->{PATH_INFO} or die $!;
-        return [ 200, ['Content-Type' => 'image/x-icon'], $fh ];
-    } 
-    elsif ( $env->{PATH_INFO} =~ /(\.js)$/ &&
-       -e ".".$env->{PATH_INFO} ) {
-        open my $fh, "<:raw", ".".$env->{ PATH_INFO } or die $!;
-        return [ 200, ['Content-Type' => 'text/javascript'], $fh ];
-    } 
-    elsif ( $env->{PATH_INFO} =~ /(\.json)$/ &&
-       -e ".".$env->{PATH_INFO} ) {
-        open my $fh, "<:raw", ".".$env->{ PATH_INFO } or die $!;
-        return [ 200, ['Content-Type' => 'application/json'], $fh ];
-    } 
-    elsif ( $env->{PATH_INFO} =~ /(\.css)$/ &&
-       -e ".".$env->{PATH_INFO} ) {
-        open my $fh, "<:raw", ".".$env->{ PATH_INFO } or die $!;
-        return [ 200, ['Content-Type' => 'text/css'], $fh ];
-    } 
-    elsif ( $env->{PATH_INFO} =~ /(\.htm|\.html)$/ &&
-       -e ".".$env->{PATH_INFO} ) {
-        open my $fh, "<:raw", ".".$env->{ PATH_INFO } or die $!;
-        return [ 200, ['Content-Type' => 'text/html'], $fh ];
-    } 
-    elsif ( $env->{PATH_INFO} =~ /(\.jpg|\.jpeg)$/ &&
-       -e ".".$env->{PATH_INFO} ) {
-        open my $fh, "<:raw", ".".$env->{ PATH_INFO } or die $!;
-        return [ 200, ['Content-Type' => 'image/jpeg'], $fh ];
-    } 
-    elsif ( $env->{PATH_INFO} =~ /(\.png)$/ &&
-       -e ".".$env->{PATH_INFO} ) {
-        open my $fh, "<:raw", ".".$env->{ PATH_INFO } or die $!;
-        return [ 200, ['Content-Type' => 'image/png'], $fh ];
-    } 
-    elsif ( $env->{PATH_INFO} =~ /(\.woff)$/ &&
-       -e ".".$env->{PATH_INFO} ) {
-        open my $fh, "<:raw", ".".$env->{ PATH_INFO } or die $!;
-        return [ 200, ['Content-Type' => 'application/x-font-woff'], $fh ];
-    } 
-    elsif ( $env->{PATH_INFO} =~ /(\.ttf)$/ &&
-       -e ".".$env->{PATH_INFO} ) {
-        open my $fh, "<:raw", ".".$env->{ PATH_INFO } or die $!;
-        return [ 200, ['Content-Type' => 'application/x-font-ttf'], $fh ];
-    } 
-    elsif ( $env->{PATH_INFO} =~ /(\.gif)$/ &&
-       -e ".".$env->{PATH_INFO} ) {
-        open my $fh, "<:raw", ".".$env->{ PATH_INFO } or die $!;
-        return [ 200, ['Content-Type' => 'image/gif'], $fh ];
-    } 
-    elsif ($env->{PATH_INFO} eq '/') {
-        return [ 200, ['Content-Type' => 'text/plain'], [ "Hello again" ] ];
-    } 
-    else {
-        return [ 404, ['Content-Type' => 'text/html'], [ '404 Not Found' ] ];
+    foreach my $key ( keys %$content_types ) {
+        my $filepath = "." . $env->{PATH_INFO};
+        if ( $filepath =~ /($key)$/ && -e $filepath ) {
+            open my $fh, "<:raw", $filepath or die $!;
+            return [ 200, ['Content-Type' =>  $content_types->{ $key } ], $fh ];
+        } 
+    }
+    DEFAULT_404: {
+        return [ 404, ['Content-Type' => 'text/html'], [ '404 Not Found' ] ]
     }
 };
