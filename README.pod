@@ -272,25 +272,26 @@ Vou colar ele abaixo e explicar através de comentários como ele funciona:
           "JooseModule",
       ],
 
-      maxThreads        : 1,       //permite executar os testes em paralelo.
-                                   //é bom pra teste unitário, mas quando envolve usabilidade
-                                   //e uso do mouse, as vezes é preciso estar com foco no browser
-                                   //e na janela. Então eu sempre deixo 1 pra garantir.
+      maxThreads        : 1, //permite executar os testes em paralelo.
+                             //é bom pra teste unitário, mas quando envolve usabilidade
+                             //e uso do mouse, as vezes é preciso estar com foco no browser
+                             //e na janela. Então eu sempre deixo 1 pra garantir.
 
-      disableCaching    : true,    //Se tiver ativado, é possível alterar o arquivo do teste e
-                                   //rodar ele que ele será atualizado automaticamente.
-                                   //basicamente vai chamar seu teste.js?_2132132132231 pra cache
+      disableCaching    : true,//Se tiver ativado, é possível alterar o arquivo do teste e
+                               //rodar ele que ele será atualizado automaticamente.
+                               //basicamente vai chamar seu teste.js?_2132132132231 pra cache
 
-  //  enableCodeCoverage: true,    //esta opção vai verificar quantos métodos sua aplicação tem e 
-                                   //quantos foram executados.
+  //  enableCodeCoverage: true,//esta opção vai verificar quantos métodos sua 
+                               //aplicação tem e quantos foram executados.
 
-      preload : [                  //Arquivos que devem ser carregados antes de executar os testes.
-          "/t/lib/jquery.js",      //se seu teste usa jquery, vc vai precisar dele carregado antes.
-          "/t/lib/joose.js",       //entao vc adiciona ele aqui
-          "/t/lib/tests_base.js",  //por exemplo <--- este arquivo tem métodos comums usados nos meus testes
+      preload : [            //Arquivos que devem ser carregados antes de executar os testes.
+          "/t/lib/jquery.js",//se seu teste usa jquery, vc vai precisar dele carregado antes.
+          "/t/lib/joose.js", //entao vc adiciona ele aqui
+          "/t/lib/tests_base.js",//<--- este arquivo tem métodos comums usados nos meus teste
 
           //aqui tem um exemploq eu verifica a url e carrega um arquivo de acordo
-  //      ( window.location.href.match( "DESENVOLVIMENTO" ) ) ? "/DEV/lib/tests-base.js"  : "./PROD/lib/tests-base.js"
+  //      ( window.location.href.match( "DESENVOLVIMENTO" ) )
+          ? "/DEV/lib/tests-base.js"  : "./PROD/lib/tests-base.js"
       ]
   })
 
@@ -299,19 +300,29 @@ Vou colar ele abaixo e explicar através de comentários como ele funciona:
   Harness.start(
       //um grupo de testes, você pode cirar quantos quiser
       {
-        group: "HOME PAGE",                         // O título deste grupo (aparece na pagina)
+        // O título deste grupo (aparece na pagina)
+        group: "HOME PAGE",                         
 
-        forceDOMVisible: true,                      // vai sempre mostrar a tela da pagina dentro de um iframe
+        // vai sempre mostrar a tela da pagina dentro de um iframe
+        forceDOMVisible: true,                      
 
-        items : [                                   // Esta é a lista de itens, a lista dos meus arquivos de teste
+        // Esta é a lista de itens, a lista dos meus arquivos de teste
+        items : [                                   
+          
+          // apenas um teste, unitario prossivelmente
+          "/t/modulo1_so_js.t.js",                  
 
-          "/t/modulo1_so_js.t.js",                  // apenas um teste, unitario prossivelmente
-
-          {                                         //este teste envolve uma página htm e um teste js que vai rodar nela
+          { //este teste envolve uma página htm e um teste js que vai rodar nela                                        
            forceDOMVisible: true,                   
-            url           : "/t/modulo1.t.js",      //caminho do meu teste
-            hostPageUrl   : "/site/modulo1.htm",    //a página que meu teste irá rodar em cima
-            preload: [                              //e aqui eu especifíco para ele carregar estes arquivos pra este teste
+            
+            //caminho do meu teste
+            url           : "/t/modulo1.t.js",      
+            
+            //a página que meu teste irá rodar em cima
+            hostPageUrl   : "/site/modulo1.htm",    
+            
+            //e aqui eu especifíco para ele carregar estes arquivos pra este teste
+            preload: [                              
               "/t/lib/jquery.js",
               "/t/lib/joose.js",
               "/t/lib/tests_base.js"
@@ -325,7 +336,8 @@ Vou colar ele abaixo e explicar através de comentários como ele funciona:
         group: "Módulo: Calculadora",
         forceDOMVisible: true,
         items : [
-          "/t/modulo2.t.js",                        //provavelmente apenas testes unitários
+          //provavelmente apenas testes unitários
+          "/t/modulo2.t.js",                        
         ]
       }
   )
@@ -342,16 +354,19 @@ etc... é uma página... vc pode usar jquery e criar o markup on the fly... ou p
 
 Vou colar um dos arquivos aqui ( modulo1_so_js.t.js ) , para analisar
 
-  StartTest(function(t) {   //<-- isso é obrigatório e indica que o teste começa aqui. O Siesta vai chamar este método
+  StartTest(function(t) {   //<-- isso é obrigatório e indica que o teste começa aqui. 
+                            //O Siesta vai chamar este método
 
-    // Aqui eu escolhi colocar este método para colar o markup automagicamente para mim. (ver markup na variavel respectiva)   
+    // Aqui eu escolhi colocar este método para colar o markup automagicamente 
+    // para mim. (ver markup na variavel respectiva)   
     function hereDoc(f) {
       return f.toString().
           replace(/^[^\/]+\/\*!?/, '').
           replace(/\*\/[^\/]+$/, '');
     }
    
-    //aqui eu defino meu markup. Foi o jeito que eu escolhi, mas poderia ter usado jquery ou qq coisa
+    //aqui eu defino meu markup. Foi o jeito que eu escolhi, mas 
+    //poderia ter usado jquery ou qq coisa
     var markup = hereDoc(function() {/*!
         <div class="menu-drop">
           <ul class="menu-root">
@@ -430,21 +445,19 @@ Vou colar um dos arquivos aqui ( modulo1_so_js.t.js ) , para analisar
      
    
     */} );
-   
 
 
-
-    //Aqui faço o jquery colar meu markup no body. Lembre-se, é browser  e o body sempre está presente.   
+    //Aqui faço o jquery colar meu markup no body. 
+    //Lembre-se, é browser  e o body sempre está presente.   
     jQuery('body').append( markup );
-
 
 
     //aqui eu crio uma divisória na listagem de resultados dos meus testes.   
     t.diag( "Simulate hover" );
 
 
-
-    //e aqui eu executo uma corrente de comandos. Pois envolve interface e tem que ser testado através de correntes (chain)
+    //e aqui eu executo uma corrente de comandos. Pois envolve interface e 
+    //tem que ser testado através de correntes (chain)
     t.chain(
       {
         //move o cursor até o elemento abaixo...
@@ -483,10 +496,8 @@ Vou colar um dos arquivos aqui ( modulo1_so_js.t.js ) , para analisar
    
   })
 
-
 Agora fica para você olhar os arquivos que estão dentro de do diretório /t/
 E rodar os testes e analisar como eles funcionam.
-
 
 =head2 Referências e links relacionados
 
@@ -500,4 +511,10 @@ http://www.bryntum.com/examples/siesta-latest/examples/browse-all-desktop.html
 
 http://www.youtube.com/watch?v=FP9U6XVdN_U
 
+=head4 AUTHOR
 
+Hernan Lopes
+
+=head4 Contribuidores
+
+Coloque seu nome aqui
