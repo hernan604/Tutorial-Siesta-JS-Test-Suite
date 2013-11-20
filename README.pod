@@ -8,7 +8,13 @@ Este tutorial ensina boas práticas para automatizar testes durante o desenvolvi
 
 Vou utilizar o Siesta JS pois é a suíte de testes mais completa e prática que encontrei. Além de ser JS puro e rodar em qualquer navegador sem precisar instalar nada, ela é feita em Joose-JS e faz tudo que o qunitjs faz, e faz tudo que o selenium faz.
 
-curiosidade: o criador do Joose-JS criou o Siesta e trabalha na bryntum
+curiosidade: o criador do Joose-JS criou o Siesta e trabalha na bryntum. 
+
+=head2 LICENÇA
+
+Conforme explicado no site, se vc precisa rodar os testes apenas dentro do browser, é possível usar o Siesta Live version de grátis.
+
+No entanto, se optar por usar o Siesta junto ao sistema de Deploy Contínuo é necessário comprar a versão Standard.
 
 =head2 DESCRIÇÃO
 
@@ -53,9 +59,12 @@ Os testes de interface envolvem automatizar o mouse para clicar na tela. É a me
 
 =head2 Testes unitários
 
-Como mencionado, os testes unitários envolvem instanciar uma classe e testar os métodos dessa classe. Ou seja, chamar possivelmente todos os métodos da classe e verificar se eles estão retornando os valores esperados. Isso tem um nome chamado 'test coverage'.
+Como mencionado, os testes unitários envolvem instanciar uma classe e testar os métodos dessa classe. Ou seja, chamar possivelmente todos os métodos da classe e verificar se eles estão retornando os valores esperados. 
 
-Test coverage é um cálculo que indica a porcentagem de métodos executados durante os testes. Ou seja, um test coverage de 100% indica que todos os métodos da aplicação foram executados durante o teste. Isso não quer dizer necessariamente que eles estão funcionando, mas pelomenos indica que estão sendo executados durante os testes.
+Indo além, a cálculo da abrangencia de testes tem até um nome: 'test coverage':
+
+"Test coverage" é um cálculo que indica a porcentagem de métodos executados durante os testes. Ou seja, um test coverage de 100% indica que todos os métodos da aplicação foram executados durante o teste. Isso não quer dizer necessariamente que eles estão funcionando, mas pelomenos indica que estão sendo executados durante os testes. 
+*** no início você não precisa saber o que é test coverage, mas conforme sua app creça, provavelmente será interessante você ativar isso no seu teste. O siesta traz essa opção.
 
 Vamos supor que eu acabei de fazer e preciso testar um módulo de calculadora, que consiste nos métodos:
 
