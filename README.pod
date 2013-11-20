@@ -31,7 +31,7 @@ Mais testes = mais qualidade (de software)
 
 Uma aplicação bem testada ajuda a garantir que se vc mexer 'aqui' não irá quebrar 'ali'. Os testes tem que ser bem pensados porque se não abrangirem todas as situações, a aplicação estará sujeita a falha.  
 
-Alem de garantir que as coisas funcionam, os testes tambem servem de exemplo de implementação. Pois qualquer pessoa pode abrir o teste e ver como as funcionalidades foram implementadas (a nível de código). Isso evita a necessidade de interromper o colega para perguntar como funcionam as coisas... isso tambem quer dizer redução de custo.
+Alem de garantir que as coisas funcionam, os testes tambem servem de exemplo de implementação. Pois qualquer pessoa pode abrir o teste e ver como as funcionalidades foram implementadas (a nível de código). Isso evita a necessidade de interromper o colega desnecessáriamente para perguntar como funcionam as coisas... isso tambem quer dizer redução de custo.
 
 Tambem ajuda as pessoas novas na empresa a não errar. Pois o novato poderá mexer tranquilamente no código e executar os testes e ter a certeza que ele não quebrou funcionalidades que ele nem sabe que existe.
 
