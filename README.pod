@@ -270,6 +270,11 @@ E entrando mais em detalhe, outras coisas tambem podem ser testadas, por exemplo
   Ao extender essa classe, quebrou alguma outra classe ?
   Se eu mexer numa classe, quebrou a retrocompatibilidade com outras classes ? 
   Se eu reutilizar um módulo, posso criar testes que comprovam que funciona ?
+  Ao refatorar um código, os testes continuam passando ?
+
+E como sempre, uma hora ou outra aparece um bug por conta de algo que não está nos testes.. o que fazer?
+
+  arrumar e adicionar um teste que prova que esse bug está arrumado.
 
 =head2 Como testar
 
@@ -601,6 +606,16 @@ Vou colar um dos arquivos aqui ( modulo1_so_js.t.js ) , para analisar
 Agora fica para você olhar, rodar os testes e analisar como eles funcionam.
 
 Os arquivos de teste estão dentro do diretório /t/
+
+=head2 Eventuais problemas
+
+Algo que pode acontecer em um ambiente bem testado (em prod), mas que não deveria, são alterações de api que quebram retrocompatibilidade com outras classes que re-utilizam essa classe.
+
+Ou seja, se tem uma determinada classe que é utilizada/reaproveitada por vários outros módulos, e por algum motivo essa classe é modificada ( com a noção que vai quebrar outros módulos, ou não ), pode quebrar os testes.
+
+Obviamente as pessoas vão xingar o autor de tal proeza e provavelmente não ficarão contentes com essa situação. No cenário ideal isso só acontece se for uma falha extremamente grave que necessita da alteração da api de produção. É claro que isso vai descreditar o desenvolvedor, mas pode acontecer.
+
+Um exemplo disso seria a linguagem javascript (ou outras) mudar, ou renomear um método... imagine só, todos os testes poderiam falhar.
 
 =head2 Exemplos do fabricante ( Bryntum )
 
