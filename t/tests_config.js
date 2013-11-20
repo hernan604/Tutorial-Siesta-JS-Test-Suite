@@ -69,6 +69,7 @@ Harness.start(
     {
       group: "Módulo: Calculadora",
       forceDOMVisible: true,
+      autoCheckGlobals  : false,
       items : [
         "./modulo2.t.js",
       ]
