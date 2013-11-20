@@ -12,33 +12,33 @@ Vou utilizar o Siesta JS pois é a suíte de testes mais completa e prática que
 
 Neste tutorial, irei demonstrar meios para desenvolvimento voltado a testes.
 
-Ao desenvolver um módulo js, é comum que criar uma classe, ou um arquivo .js com alguns métodos e variáveis. E logo depois esse módulo/script é carregado em uma página de testes (html). Em seguida abre-se a página no browser. 
+Ao desenvolver um módulo js, é comum que criar uma classe, ou um arquivo .js com alguns métodos e variáveis. E logo depois esse módulo/script é carregado em uma página de testes (html). Em seguida abre-se a página no browser.
 Assim que o desenvolvimento continua, o desenvolvedor aperta F5 para atualizar a tela verificar se a alteração funcionou de fato. Isso é feito até que o módulo parece funcionar e dai essa bagaça sobe para produção. E funciona...
 
 até que ...
 
-outra pessoa ou até você mesmo precisa mexer nesse módulo para fazer alterações. 
+outra pessoa ou até você mesmo precisa mexer nesse módulo para fazer alterações.
 
 O X da questão é que esse módulo aparenta ter algumas funcionalidades, mas de cara vc pode não saber exatamente quais as funcionalidades que o módulo de fato faz... então vc pode alterar um ponto para atender um determinado requisito, mas derepente essa alteração pode quebrar um outro ponto no módulo que não está sendo chamado na sua página de teste (HTM).
 
-Os testes ajudam a prevenir exatamente esse tipo de comportamento. 
+Os testes ajudam a prevenir exatamente esse tipo de comportamento.
 Uma aplicação bem testada ajuda a garantir que se vc mexer 'aqui' não irá quebrar 'ali'.
 
-Isso é importante pois durante o desenvolvimento de um módulo, o desenvolvedor tem tudo fresco na cabeça... nesse momento ele conhece todos os métodos do módulo e sabe de cor todas as funcionalidades e sabe exatamente o que o módulo faz ou não faz. 
+Isso é importante pois durante o desenvolvimento de um módulo, o desenvolvedor tem tudo fresco na cabeça... nesse momento ele conhece todos os métodos do módulo e sabe de cor todas as funcionalidades e sabe exatamente o que o módulo faz ou não faz.
 
-Então imagine que o módulo está pronto e funcionando em produção por 2 anos... quando derepente, aparece uma alteração em funcionalidade.... e agora? o módulo vai ser alterado... será que vai quebrar algo ? 
+Então imagine que o módulo está pronto e funcionando em produção por 2 anos... quando derepente, aparece uma alteração em funcionalidade.... e agora? o módulo vai ser alterado... será que vai quebrar algo ?
 
 =head2 O que são testes
 
-Testes são 'provas' de que funcionalidades estão funcionando como deveriam. 
+Testes são 'provas' de que funcionalidades estão funcionando como deveriam.
 
 Vamos supor que eu tenho um módulo de calculadora, que consiste basicamente em métodos:
 
-  somar = function ( a, b ) { 
+  somar = function ( a, b ) {
       return a + b;
   }
 
-  subtrair = function ( a, b ) { 
+  subtrair = function ( a, b ) {
       return a - b;
   }
 
@@ -46,7 +46,7 @@ Vamos supor que eu tenho um módulo de calculadora, que consiste basicamente em 
       return a * b;
   }
 
-  dividir = function ( a , b ) { 
+  dividir = function ( a , b ) {
       return a / b;
   }
 
@@ -58,7 +58,7 @@ muito simples, veja um exemplo para testar o método de soma:
 
   ok( somar( 1 , 2 ) == 3, ' soma de 1 com 2 resulta em 3 ' )
 
-primeiro, vou explicar o que é o 'ok':  O método ok é bastande comum nas suítes de testes de diferentes linguagens. 
+primeiro, vou explicar o que é o 'ok':  O método ok é bastande comum nas suítes de testes de diferentes linguagens.
 
 As suites de testes disponibilizam alguns métodos padrão, são eles:
 
@@ -75,14 +75,14 @@ Tambem muito comum é o método is:
   is( valor1, valor2, desc )
 
 exemplo:
-  
+
   is( somar(1,2), 3, " o valor do primeiro argumento é igual ao segundo arqumento " )
 
-Outro método de assertion de testes bastante comum é o isDeeply: 
+Outro método de assertion de testes bastante comum é o isDeeply:
 
   isDeeply( obj1, obj2, desc )
 
-Que basicamente recebe dois objetos e verifica se eles tem os mesmos itens. Não precisam estar necessariamente na mesma ordem mas tem que eles tem que existir tanto em um objeto quanto no outro. 
+Que basicamente recebe dois objetos e verifica se eles tem os mesmos itens. Não precisam estar necessariamente na mesma ordem mas tem que eles tem que existir tanto em um objeto quanto no outro.
 
 Exemplo que vai dar certo:
 
@@ -110,11 +110,11 @@ Não ter testes é uma roleta russa... hora da certo, hora pode dar errado.
 
 =head2 Testes de interface
 
-Outro tipo de teste são os testes que envolvem interface. 
+Outro tipo de teste são os testes que envolvem interface.
 
 Por exemplo, ao clicar num botão 'fundo azul', o fundo da tela tem que ficar azul. Como testar isso ?
 
-Isso tambem é possível com o siesta JS. e é bastante fácil, segue um exemplo: 
+Isso tambem é possível com o siesta JS. e é bastante fácil, segue um exemplo:
 
   t.chain(
     //leve o mouse até o seletor abaixo
@@ -143,7 +143,7 @@ Isso tambem é possível com o siesta JS. e é bastante fácil, segue um exemplo
       t.is( jQuery("body").css("background-color") , "#0000FF", " O fundo ficou azul, massa !!" )
       // validação simples que verifica se o fundo está azul
 
-      next(); 
+      next();
     }
   )
 
@@ -168,7 +168,7 @@ Assim como escrever um livro, é questão de costume. Alguns preferem começar p
 
 =head2 O que testar ?
 
-Esta é uma questão que não tem resposta definida. Cada projeto tem necessidades distintas e o teste deve atender o projeto. 
+Esta é uma questão que não tem resposta definida. Cada projeto tem necessidades distintas e o teste deve atender o projeto.
 
 Com um teste mais macro, eu começaria a resposta por: Os testes devem provar o que a especificação pediu. Ou seja, aquele email do projeto que tem várias linhas de como deve funcionar, isso pode ser testado para garantir e provar que as solicitações foram atendidas.
 
@@ -193,7 +193,7 @@ Outro ponto importante é separar bem os métodos... para facilitar o teste. Ou 
 
 Até nos testes é uma boa prática não repetir código.
 
-Vamos supor que vc precisa de alguns métodos que são comums para testar todos os seus módulos. 
+Vamos supor que vc precisa de alguns métodos que são comums para testar todos os seus módulos.
 
 Se optar pelo pior jeito, vai colar o trecho em cada arquivo de teste.
 
@@ -203,15 +203,15 @@ Por exemplo, vamos supor que vc tem 3 arquivos de testes, e pra testar, é neces
 
   método de login:
 
-  login = function( username, password ) { 
+  login = function( username, password ) {
       ...
-  } 
+  }
 
   arquivo_teste1.js
   arquivo_teste2.js
   arquivo_teste3.js
 
-É possível colar o método de login nos 3 arquivos de teste, ou, 
+É possível colar o método de login nos 3 arquivos de teste, ou,
 
 No cenário ideal é possível salvar esse método de login dentro de um arquivo, ex: login.js e carregar ele junto com os testes, ex:
 
@@ -226,7 +226,7 @@ Agora vou demonstrar como foi criado o projeto de exemplo que acompanha este tut
 
 Você vai precisar de um webserver. (apache, nginx etc) para abrir rodar os testes.
 
-1. Copie todos os arquivos deste tutorial para um diretório no seu servidor, e depois acesse t/index.htm.  
+1. Copie todos os arquivos deste tutorial para um diretório no seu servidor, e depois acesse t/index.htm.
 
 Por conveniência, eu escolhi jogar tudo na raiz, e acesso da seguinte maneira: Recomendo fazer o mesmo ao menos na primeira vez
 
@@ -249,9 +249,9 @@ Vou colar ele abaixo e explicar através de comentários como ele funciona:
   Harness.configure({
       title             : 'Exemplo de testes',    //apenas um título para os testes
 
-      verbosity         : 0,                      
+      verbosity         : 0,
 
-  //  cachePreload      : true,    //vai cachear os arquivos de preload. 
+  //  cachePreload      : true,    //vai cachear os arquivos de preload.
                                    //preload quer dizer, carregar antes
                                    //ou seja, arquivos carregados antes do
                                    //arquivo de teste
@@ -262,9 +262,9 @@ Vou colar ele abaixo e explicar através de comentários como ele funciona:
       expectedGlobals   : [        //aqui você coloca quais variáveis são esperadas
           "Joose",                 //serem globais.. se escapar alguma variável
           "Class",                 //global não esperada, o siesta vai te avisar
-          "Role", 
-          "Module", 
-          "Singleton", 
+          "Role",
+          "Module",
+          "Singleton",
           "require",
           "joosetop",
           "JooseGearsInitializeGears",
@@ -281,7 +281,7 @@ Vou colar ele abaixo e explicar através de comentários como ele funciona:
                                //rodar ele que ele será atualizado automaticamente.
                                //basicamente vai chamar seu teste.js?_2132132132231 pra cache
 
-  //  enableCodeCoverage: true,//esta opção vai verificar quantos métodos sua 
+  //  enableCodeCoverage: true,//esta opção vai verificar quantos métodos sua
                                //aplicação tem e quantos foram executados.
 
       preload : [            //Arquivos que devem ser carregados antes de executar os testes.
@@ -301,28 +301,28 @@ Vou colar ele abaixo e explicar através de comentários como ele funciona:
       //um grupo de testes, você pode cirar quantos quiser
       {
         // O título deste grupo (aparece na pagina)
-        group: "HOME PAGE",                         
+        group: "HOME PAGE",
 
         // vai sempre mostrar a tela da pagina dentro de um iframe
-        forceDOMVisible: true,                      
+        forceDOMVisible: true,
 
         // Esta é a lista de itens, a lista dos meus arquivos de teste
-        items : [                                   
-          
-          // apenas um teste, unitario prossivelmente
-          "/t/modulo1_so_js.t.js",                  
+        items : [
 
-          { //este teste envolve uma página htm e um teste js que vai rodar nela                                        
-           forceDOMVisible: true,                   
-            
+          // apenas um teste, unitario prossivelmente
+          "/t/modulo1_so_js.t.js",
+
+          { //este teste envolve uma página htm e um teste js que vai rodar nela
+           forceDOMVisible: true,
+
             //caminho do meu teste
-            url           : "/t/modulo1.t.js",      
-            
+            url           : "/t/modulo1.t.js",
+
             //a página que meu teste irá rodar em cima
-            hostPageUrl   : "/site/modulo1.htm",    
-            
+            hostPageUrl   : "/site/modulo1.htm",
+
             //e aqui eu especifíco para ele carregar estes arquivos pra este teste
-            preload: [                              
+            preload: [
               "/t/lib/jquery.js",
               "/t/lib/joose.js",
               "/t/lib/tests_base.js"
@@ -330,19 +330,19 @@ Vou colar ele abaixo e explicar através de comentários como ele funciona:
           }
         ]
       },
-    
+
       //outro grupo de testes
       {
         group: "Módulo: Calculadora",
         forceDOMVisible: true,
         items : [
           //provavelmente apenas testes unitários
-          "/t/modulo2.t.js",                        
+          "/t/modulo2.t.js",
         ]
       }
   )
 
-Lembre-se sempre que o teste estará rodando no browser, e tudo no browser são páginas.. então tem um 
+Lembre-se sempre que o teste estará rodando no browser, e tudo no browser são páginas.. então tem um
 
   window
   window.document
@@ -350,22 +350,24 @@ Lembre-se sempre que o teste estará rodando no browser, e tudo no browser são 
 
 etc... é uma página... vc pode usar jquery e criar o markup on the fly... ou pode rodar o teste em cima de uma página (url). A escolhe é sua.
 
+Um exemplo onde crio o markup on the fly está na parte "Estrutura do arquivo de testes"
+
 =head2 Estrutura do arquivo de testes
 
 Vou colar um dos arquivos aqui ( modulo1_so_js.t.js ) , para analisar
 
-  StartTest(function(t) {   //<-- isso é obrigatório e indica que o teste começa aqui. 
+  StartTest(function(t) {   //<-- isso é obrigatório e indica que o teste começa aqui.
                             //O Siesta vai chamar este método
 
-    // Aqui eu escolhi colocar este método para colar o markup automagicamente 
-    // para mim. (ver markup na variavel respectiva)   
+    // Aqui eu escolhi colocar este método para colar o markup automagicamente
+    // para mim. (ver markup na variavel respectiva)
     function hereDoc(f) {
       return f.toString().
           replace(/^[^\/]+\/\*!?/, '').
           replace(/\*\/[^\/]+$/, '');
     }
-   
-    //aqui eu defino meu markup. Foi o jeito que eu escolhi, mas 
+
+    //aqui eu defino meu markup. Foi o jeito que eu escolhi, mas
     //poderia ter usado jquery ou qq coisa
     var markup = hereDoc(function() {/*!
         <div class="menu-drop">
@@ -391,7 +393,7 @@ Vou colar um dos arquivos aqui ( modulo1_so_js.t.js ) , para analisar
             </li>
           </ul>
         </div>
-       
+
       <script>
         jQuery( document ).ready( function () {
           jQuery( ".menu-drop > ul > li" )
@@ -410,53 +412,53 @@ Vou colar um dos arquivos aqui ( modulo1_so_js.t.js ) , para analisar
              height: 30px;
              width: 100%;
         }
-   
+
         .menu-drop .menu-root {
-             
+
         }
-   
+
         .menu-drop > ul {
              list-style: none outside none;
         }
-   
+
         .menu-drop > ul > li:first-child {
              margin-left: 0px;
         }
-   
+
         .menu-drop > ul > li > ul {
             position: absolute;
             background: #FF0;
         }
-   
+
         .menu-drop > ul > li {
              float: left;
              margin-left: 15px;
         }
-   
+
         .menu-drop > ul > li > ul {
              display: none;
         }
-   
+
         .menu-drop > ul > li.hover > ul {
              display: block;
              list-style: none;
         }
       </style>
-     
-   
+
+
     */} );
 
 
-    //Aqui faço o jquery colar meu markup no body. 
-    //Lembre-se, é browser  e o body sempre está presente.   
+    //Aqui faço o jquery colar meu markup no body.
+    //Lembre-se, é browser  e o body sempre está presente.
     jQuery('body').append( markup );
 
 
-    //aqui eu crio uma divisória na listagem de resultados dos meus testes.   
+    //aqui eu crio uma divisória na listagem de resultados dos meus testes.
     t.diag( "Simulate hover" );
 
 
-    //e aqui eu executo uma corrente de comandos. Pois envolve interface e 
+    //e aqui eu executo uma corrente de comandos. Pois envolve interface e
     //tem que ser testado através de correntes (chain)
     t.chain(
       {
@@ -493,7 +495,7 @@ Vou colar um dos arquivos aqui ( modulo1_so_js.t.js ) , para analisar
     //  target: ".menu-root>li:nth-child(1)"
     //}
     )
-   
+
   })
 
 Agora fica para você olhar os arquivos que estão dentro de do diretório /t/
